@@ -1,0 +1,7 @@
+﻿  proj2.cpp
+c:\clone\kzhao\src\netlist.h(377): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\clone\kzhao\src\netlist.h(583): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\clone\kzhao\src\netlist.h(602): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\clone\kzhao\src\netlist.h(886): warning C4715: 'netlist::create_gate': not all control paths return a value
+  myevl-vc15.vcxproj -> C:\Clone\kzhao\src\x64\Debug\myevl-vc15.exe
+  myevl-vc15.vcxproj -> C:\Clone\kzhao\src\x64\Debug\myevl-vc15.pdb (Full PDB)
