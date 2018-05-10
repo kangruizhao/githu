@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="common-header">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse bg-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Inventory of Snack and Drink</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/inventory">Home</a></li>
+                <li ><a href="/inventory/add">Add Snack/Drink</a></li>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+  <div class="container">
+    <form action="/inventory/editsomething/{{food_will_edit.to_class_name}}/{{food_will_edit.id}}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="row">
+         <div class="col-sm">
+            <label for="Name">Name</label>
+            <input class="form-control" type="text" name="Name" id="Name" value="{{food_will_edit.sname}}" require/>
+           </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+           <div class="col-sm">
+             <label for="ingredients">Ingredients</label>
+             <input class="form-control" type="text" name="Ingredients" id="Ingredients" value="{{food_will_edit.ingredients}}" />
+            </div>
+           </div>
+         </div>
+         <div class="row">
+          <div class="col-sm">
+            <p>FoodType:{{food_will_edit.to_class_name}}</p>
+           </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+             <div class="col-sm">
+               <label for="selectrecommand">recommended snacks/drink with this Item</label>
+               <p>use control + your mouse to select multiple choice</p>
+               <select class="form-control" multiple="multiple" name ="selectrecommand" id="selectrecommand">
+               {% for food in food_list %}
+               <option value="{{food.sname}}">{{food.sname}}</option>
+               {% endfor %}
+              </select>
+            </div>
+           </div>
+          </div>
+          <div class="row">
+           <div class="col-sm">
+             <button type="submit" class="btn btn-primary">Edit</button>
+           </div>
+          </div>
+</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+//trim the input
+$(function(){
+      $('input[type="text"]').change(function(){
+         this.value = $.trim(this.value);
+       });
+    });
+    </script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="common-header">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse bg-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Inventory of Snack and Drink</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="/inventory/add">Add Snack/Drink</a></li>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav>
+<div class="container">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Name of Drink/Snack</th>
+    <th scope="col">Delet this item</th>
+    <th scope="col">Edit this item</th>
+  </tr>
+</thead>
+  <tbody>
+  {% for food in food_list %}
+  <tr>
+    <th >
+      <a href="#{{food.to_class_name}}{{ food.id }}" aria-controls="{{food.to_class_name}}{{ food.id }}" data-toggle="collapse" aria-expanded="false">{{ food.sname }}</a>
+         <div class="collapse row" id="{{food.to_class_name}}{{ food.id }}">
+              <div class="well col-sm">
+              <p>Name:{{food.sname}}</p>
+              <p>Ingredients:{{food.ingredients}}</p>
+              <p>best partner</p>
+              {% if food.to_class_name == "Snack" %}
+                   {% for drink in food.recommended_drink.all %}
+                   <p>Name:{{drink.sname}}</p>
+                  {% endfor %}
+              {% endif %}
+              {% if food.to_class_name == "Drink" %}
+                   {% for snack in food.snack_set.all %}
+                   <p>Name:{{snack.sname}}</p>
+                  {% endfor%}
+              {% endif %}
+              </div>
+           </div>
+
+      </th>
+      <th><a onclick="if (!confirm('Do you want to delete {{ food.sname }}?')) { return false }" href="/inventory/delete/{{food.to_class_name}}/{{ food.id }}">delete</a></th>
+      <th><a href="/inventory/edit/{{food.to_class_name}}/{{ food.id }}">edit</a></th>
+  <tr>
+
+  {% endfor %}
+</tbody>
+</table>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>
